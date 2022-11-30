@@ -1,0 +1,142 @@
+create database SchoolManagmentSystem
+use SchoolManagmentSystem
+
+create table School
+					(school_Id int not null primary key, schoolAdd varchar(50))
+
+insert into School(school_Id,schoolAdd)
+values
+(1,'ABC'),
+(2,'BC'),
+(3,'DA'),
+(4,'AD'),
+(5,'AB')
+
+
+create table classroom
+					(classroom_Id int not null primary key,
+					classroomCapcity int, classroomType varchar(50))
+
+insert into classroom(classroom_Id,classroomCapcity,classroomType)
+values
+(1, 50, 'A' ),
+(2, 60, 'B' ),
+(3, 40, 'C' ),
+(4, 80, 'D' ),
+(5, 30, 'F' )
+
+create table Teacher
+					(TeacherId int not null primary key,
+					TeacherFisrtName varchar(50), TeacherLastName varchar(50),
+					TeacharSubject varchar(50), TeacherDegree varchar(50),
+					TeacherSalary int)
+
+
+insert into Teacher(
+TeacherId, TeacherFisrtName, TeacherLastName, TeacharSubject,
+TeacherDegree, TeacherSalary)
+values
+(1, 'alijan', 'ali', 'C', 'A', 6500),
+(2, 'alikhan', 'khan', 'C++', 'A', 9500),
+(3, 'alijan', 'khan', 'java', 'A', 6400),
+(4, 'sardar', 'agha', 'C#', 'A', 7800),
+(5, 'ahmad', 'jan', 'C#', 'A', 4500),
+(6, 'alijan', 'ali', 'C', 'A', 6500)
+
+create table Student
+					(studentId int not null primary key,
+					studentFirstName varchar(50),
+					studentLastName varchar(50),
+					studentBirthDate date,
+					studentGender varchar(50),
+					schoolTime time)
+
+insert into Student(studentId, studentFirstName, studentLastName, studentBirthDate,
+studentGender, schoolTime)
+values
+(10,'ahmad', 'ahmad', null, 'mail', null),
+(11,'ahmadjan', 'jan', null, 'mail', null),
+(12,'walid', 'khan', null, 'mail', null),
+(13,'sardar', 'sardar', null, 'mail', null),
+(14,'ahmad', 'agha', null, 'mail', null),
+(15,'faizahmad', 'faiz', null, 'mail', null),
+(16,'rahimulla', 'amini', null, 'mail', null),
+(17,'wahab', 'adil', null, 'mail', null),
+(18,'janagha', 'jan', null, 'mail', null),
+(19,'ahmadullah', 'ahmadi', null, 'mail', null)
+
+
+					
+create table subjects
+					(subjectId int not null primary key,
+					subjectName varchar(50),
+					subjectClass varchar(50))
+
+
+insert into subjects(subjectId, subjectName,subjectClass)
+values
+(100, 'C++', 'A'),
+(200, 'C++', 'B'),
+(300, 'java', 'C'),
+(400, 'C', 'D'),
+(500, 'C++', 'A'),
+(600, 'C', 'C'),
+(700, 'C#', 'B'),
+(800, 'C#', 'A'),
+(900, 'java', 'B')
+
+create table report
+					(school_Id int,
+					ReportId int not null primary key,
+					TotalTeacher int,
+					TotalTeacherMale int,
+					TotalTeacharFamele int,
+					TotalStudents int,
+					TotalMaleStudents int,
+					TotalFameleStudents int,
+					TotalClass int,
+					TotalMaleClass int,
+					TotalFameleCalss int,
+					TotalClassroom int,
+					TotalMaleClassroom int,
+					TotalFameleClassroom int,
+					constraint schooFK foreign key (school_Id) references School(school_Id))
+
+
+insert into report(school_Id, ReportId, TotalTeacher, TotalTeacherMale,TotalTeacharFamele,
+TotalStudents, TotalMaleStudents, TotalFameleStudents, TotalClass, TotalMaleClass,
+TotalFameleCalss, TotalClassroom, TotalMaleClassroom, TotalFameleClassroom)
+values
+(1,200, 8, 5, 3, 50, 45, 5, 10, 7, 3, 12, 8, 4),
+(2,201, 10, 7, 3, 60, 55, 5, 10, 7, 3, 12, 6, 6),
+(3,202, 6, 4, 2, 45, 40, 5, 10, 7, 3, 12, 10, 2),
+(4,203, 10, 5, 5, 60, 50, 10, 10, 7, 3, 12, 10, 2),
+(5,204, 8, 5, 3, 50, 45, 5, 10, 7, 3, 12, 10, 2)
+
+
+
+create table class
+				(
+				school_Id int,
+				classroom_Id int,
+				TeacherId int,
+				studentId int,
+				subjectId int,
+				classId int not null primary key, className varchar(50)
+				constraint scholFK foreign key (school_Id) references School(school_Id),
+				constraint classrFK foreign key (classroom_Id) references classroom(classroom_Id),
+				constraint TesFK foreign key (TeacherId) references Teacher(TeacherId),
+				constraint stuFK foreign key (studentId) references Student(studentId),
+				constraint subjecFK foreign key (subjectId) references subjects(subjectId),
+				)
+
+
+insert into class
+(school_Id, classroom_Id, TeacherId, studentId, subjectId, classId, className)
+values
+(1, 1, 1, 10, 100, 1000, 'ABCdd')
+
+				
+			
+				
+				
